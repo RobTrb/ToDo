@@ -1,5 +1,6 @@
 html {
-    height: 100vh;
+    height: auto;
+    min-height: 100%;
     min-width: 600px;
     background-image: linear-gradient(130deg, #FFFFFF, rgba(36, 120, 177, 0.637));
 }
@@ -21,6 +22,16 @@ header {
     margin-top: 20px;
     width: 200px;
     height: 200px;
+}
+
+.counterTextClass {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-bottom: 7%;
+    font-family: "Pacifico";
+    font-size: 80px;
 }
 
 .main {
@@ -103,15 +114,7 @@ li {
     
 }
 
-.counterTextClass {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding-bottom: 90px;
-    font-family: "Pacifico";
-    font-size: 80px;
-}
+
 
 .completed {
 color: red;

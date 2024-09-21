@@ -3,13 +3,13 @@ const submitBtn = document.querySelector("#submitButton");
 const clearTodo = document.querySelector("#clearList")
 const taskCounter = document.querySelector("#counterText");
 const todoList = document.querySelector("#todoList");
-const todoListArray = ["test1", "test2", "test3"];
+let todoListArray = [];
 
 taskCounter.innerHTML = todoList.getElementsByTagName("li").length;
 
-//klick to add item
+//buttons with click functionality
 submitBtn.addEventListener("click", addTask);
-clearTodo.addEventListener("click", displayAllTasks);
+clearTodo.addEventListener("click", clearTodoList);
 
 //press enter to add item
 inputText.addEventListener("keydown", 
@@ -22,19 +22,25 @@ inputText.addEventListener("keydown",
     });
 
 
-//clear list
-clearTodo.addEventListener("click", clearTodoList);
-
 //Functions
 
-function displayAllTasks() 
+//to refresh entire list
+function refreshList() 
 {
-todoListArray.forEach((item, index) => {
+todoList.innerHTML="";
+todoListArray.forEach((tasks, index) => {
 const listItem = document.createElement("li");
-todoList.appendChild(listItem);
+//listItem.textContent = tasks.text;
 const itemLabel = document.createElement("span");
-itemLabel.innerText = item;
+itemLabel.textContent = tasks.text;
+todoList.appendChild(listItem);
+itemLabel.innerText = tasks.text;
 listItem.appendChild(itemLabel);
+
+if(tasks.complete){
+    listItem.className = "completed";
+}
+
 taskCounter.innerHTML = todoList.getElementsByTagName("li").length;
 })
 }
@@ -44,15 +50,27 @@ function addTask()
 const newTask = inputText.value.trim(); //trim means delete empty space
 if (newTask !== "")
 {
-   todoListArray.push({listItem: newTask, completed: false})
+   todoListArray.push({text: newTask, completed: false});  
 };
+refreshList();
 inputText.value =""
 };
 
+//to toggle complete status on list item
+function toggleCompleted(index){
 
-function clearTodoList() {
-//clear list
 }
+
+//clear entire array and ul
+function clearTodoList() 
+{
+todoListArray = [];
+todoList.innerHTML="";
+inputText.value ="";
+taskCounter.innerHTML = todoList.getElementsByTagName("li").length;
+}
+
+
 
 /* add item to list without array
 function addItemToList() {
@@ -80,5 +98,3 @@ function addItemToList() {
 
 
 //för att göra en item completed ska man byta klass på den till en klass som är stylad som completed
-
-
