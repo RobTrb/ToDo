@@ -114,13 +114,17 @@ li {
     
 }
 
-
+.clearList:hover{ color: rgba(36, 120, 177, 0.637);
+}
 
 .completed {
 color: red;
 text-decoration: line-through;
 }
 
-.clearList:hover{ color: rgba(36, 120, 177, 0.637);
+.deleteItem {
+position: absolute;
+left: 69%;
+right: 50%;  
+color: grey
 }
-

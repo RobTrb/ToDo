@@ -1,9 +1,20 @@
+/*
+Notes to future me:
+
+Practice more with arrays and how it works with index push.
+Learn about $ and how that works.
+
+If i was to do this project again from scratch then maybe look into dividing functionality.
+This in order not have to have a big refreshList function and create the HTML ul from scratch everytime i add or remove items.
+*/
+
 const inputText = document.querySelector("#inputForm");
 const submitBtn = document.querySelector("#submitButton");
 const clearTodo = document.querySelector("#clearList")
 const taskCounter = document.querySelector("#counterText");
+const completeCounter = document.querySelector("#complTaskCounter");
 const todoList = document.querySelector("#todoList");
-let todoListArray = [];
+let todoListArray = []; //clearTodoList function will not work if this is set to const. Why? Guess is that it´s because it gets redeclaired later in the code? I think in the add function
 
 taskCounter.innerHTML = todoList.getElementsByTagName("li").length;
 
@@ -30,36 +41,56 @@ function refreshList()
 todoList.innerHTML="";
 todoListArray.forEach((tasks, index) => {
 const listItem = document.createElement("li");
-//listItem.textContent = tasks.text;
 const itemLabel = document.createElement("span");
-itemLabel.textContent = tasks.text;
 todoList.appendChild(listItem);
-itemLabel.innerText = tasks.text;
 listItem.appendChild(itemLabel);
+itemLabel.textContent = tasks.text;
+itemLabel.innerText = tasks.text;
 
-if(tasks.complete){
-    listItem.className = "completed";
-}
+const deleteTask = document.createElement("button");
+deleteTask.innerHTML = "<i class= 'fa-solid fa-trash'></i>";
+deleteTask.setAttribute("class", "deleteItem");
+listItem.appendChild(deleteTask);
+deleteTask.addEventListener("click", () => removeFromArray(index)); //push index to remove from removeFromArray function and remove
+
+if(tasks.completed){
+    itemLabel.className = "completed";
+} else{
+    itemLabel.className = "";
+};
+
+itemLabel.style.userSelect = "none";
+itemLabel.style.cursor = "pointer";
+itemLabel.addEventListener("click", () => toggleCompleted(index)); //push index to toggleCompleted function and toggle 
+});
 
 taskCounter.innerHTML = todoList.getElementsByTagName("li").length;
-})
-}
+completeCounter.innerHTML = "Completed tasks:" + todoList.getElementsByClassName("completed").length;
+};
 
+//Add task to the ToDo
 function addTask() 
 {
 const newTask = inputText.value.trim(); //trim means delete empty space
 if (newTask !== "")
 {
    todoListArray.push({text: newTask, completed: false});  
-};
+} else {alert("You have to type something!");};
+
 refreshList();
 inputText.value =""
 };
 
+function removeFromArray(index){
+    todoListArray.pop(index);
+    refreshList();
+}
+
 //to toggle complete status on list item
 function toggleCompleted(index){
-
-}
+   todoListArray[index].completed = !todoListArray[index].completed;
+   refreshList();
+};
 
 //clear entire array and ul
 function clearTodoList() 
@@ -68,33 +99,4 @@ todoListArray = [];
 todoList.innerHTML="";
 inputText.value ="";
 taskCounter.innerHTML = todoList.getElementsByTagName("li").length;
-}
-
-
-
-/* add item to list without array
-function addItemToList() {
-    let text = inputText.value;
-    
-    if(text.length == 0){return} //if nothing has been typed
-
-    const listItem = document.createElement("li"); //to create new list item
-    todoList.appendChild(listItem);
-    const itemLabel = document.createElement("span");
-    itemLabel.innerText = text;
-    listItem.appendChild(itemLabel);
-    inputText.value= ""; //clear input field
-    
-    //add event listener to items in list
-    itemLabel. addEventListener("click", 
-        function(addRemoveLine){})
-
-    taskCounter.innerHTML = todoList.getElementsByTagName("li").length;
-}
-*/
-
-  
-    
-
-
-//för att göra en item completed ska man byta klass på den till en klass som är stylad som completed
+};
