@@ -133,7 +133,9 @@ text-decoration: line-through;
 }
 
 .deleteItem {
-position: fixed;
+position: absolute;
+justify-content: flex-end;
+margin-right: 5px;
 left: 65%;
 color: grey
 }
