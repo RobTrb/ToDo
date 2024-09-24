@@ -14,7 +14,7 @@ const clearTodo = document.querySelector("#clearList")
 const taskCounter = document.querySelector("#counterText");
 const completeCounter = document.querySelector("#complTaskCounter");
 const todoList = document.querySelector("#todoList");
-let todoListArray = []; //clearTodoList function will not work if this is set to const. Why? Guess is that it´s because it gets redeclaired later in the code? I think in the add function
+const todoListArray = []; //clearTodoList function will not work if this is set to const. Why? Guess is that it´s because it gets redeclaired later in the code? I think in the add function
 
 taskCounter.innerHTML = todoList.getElementsByTagName("li").length;
 
@@ -75,7 +75,9 @@ const newTask = inputText.value.trim(); //trim means delete empty space
 if (newTask !== "")
 {
    todoListArray.push({text: newTask, completed: false});  
-} else {alert("You have to type something!");};
+} else {
+   inputText.setAttribute("placeholder", "You have to type something!")  
+};
 
 refreshList();
 inputText.value =""
@@ -95,7 +97,7 @@ function toggleCompleted(index){
 //clear entire array and ul
 function clearTodoList() 
 {
-todoListArray = [];
+todoListArray.splice(0, todoListArray.length);
 todoList.innerHTML="";
 inputText.value ="";
 taskCounter.innerHTML = todoList.getElementsByTagName("li").length;
