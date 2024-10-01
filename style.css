@@ -63,11 +63,15 @@ header {
 .logo {
    display: flex;
    margin: auto;
-   max-width: 100%;
-   min-width: 100%;
    flex-direction: column;
    max-width: auto;
+   min-width: auto;
    align-items: center;
+}
+
+.logoImage {
+    max-width: 100%;
+    min-width: 30%;
 }
 
 form {
