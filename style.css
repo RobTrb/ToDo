@@ -64,6 +64,7 @@ header {
    display: flex;
    margin: auto;
    max-width: 100%;
+   min-width: 100%;
    flex-direction: column;
    max-width: auto;
    align-items: center;
