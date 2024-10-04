@@ -9,6 +9,7 @@ This in order not have to have a big refreshList function and create the HTML ul
 */
 
 const inputText = document.querySelector("#inputForm");
+const placeHolder = document.querySelector("#placeholder")
 const submitBtn = document.querySelector("#submitButton");
 const clearTodo = document.querySelector("#clearList")
 const taskCounter = document.querySelector("#counterText");
@@ -17,6 +18,7 @@ const todoList = document.querySelector("#todoList");
 const todoListArray = []; //clearTodoList function will not work if this is set to const. Why? Guess is that it´s because it gets redeclaired later in the code? I think in the add function
 
 taskCounter.innerHTML = todoList.getElementsByTagName("li").length;
+
 
 //buttons with click functionality
 submitBtn.addEventListener("click", addTask);
@@ -76,7 +78,8 @@ if (newTask !== "")
 {
    todoListArray.push({text: newTask, completed: false});  
 } else {
-   inputText.setAttribute("placeholder", "You have to type something!")  
+   placeHolder.classList.add("placeholder-flash");
+   setTimeout(() => {placeHolder.classList.remove("placeholder-flash")}, 1000);      
 };
 
 refreshList();

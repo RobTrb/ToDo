@@ -9,9 +9,6 @@ body {
     background-attachment: fixed;
 }
 
-
-
-
 header {
     background: grey;
     color:rgb(255, 255, 255);
@@ -32,7 +29,7 @@ header {
 }
 
 .logoCounter {
-    display: block;
+    
     align-items: center;
     margin-top: 20px;
     width: 200px;
@@ -52,12 +49,15 @@ header {
 }
 
 .main {
+    display: flex;
+    flex-direction: column;
     position: absolute;
     margin-left: 28%;
     width: 600px;
     font-family: "Pacifico";
     padding: 20px;
-    display: inline-block; 
+    animation: load-page 1s ease-in;
+    
 }
 
 .logo {
@@ -76,6 +76,7 @@ header {
 
 form {
     background-color: rgb(255, 255, 255);
+    color: black;
     border-radius: 10px;
     padding: 20px;
     display: flex;
@@ -84,13 +85,38 @@ form {
     margin-top: 40%;
 }
 
+#placeholder {
+    position: absolute;
+    text-align: left;
+    color: red;
+    opacity: 0%;   
+}
+
+@keyframes placeholder-flash {
+    0%{opacity: 0%;}
+    25%{opacity: 100%;}
+    50%{opacity: 0%;}
+    75%{opacity: 100%}
+    100%{opacity:0%}
+}
+
+#placeholder.placeholder-flash{
+    position: absolute;
+    text-align: left;
+    color: red;
+    opacity: 0%;
+    animation: placeholder-flash 1s;    
+}  
+
+
+
 input[type="text"] {
     height: 30px;
     outline: 0;
     border: none;
     font-size: 1rem;
     font-family: "Pacifico";
-    color: grey;
+    color: rgb(0, 0, 0);
     flex-grow: 1;
 }
 
@@ -125,7 +151,8 @@ li {
     border-bottom: 1px solid lightgrey;
     padding: 15px 0;
     font-size: 1rem;
-    color: grey
+    color: rgb(0, 0, 0);
+    animation: load-page 300ms ease-in;
 }
 
 .clearList {
@@ -143,8 +170,11 @@ li {
 }
 
 .completed {
-color: red;
+
+transition: text rgb(0, 0, 0) 10s; 
 text-decoration: line-through;
+animation: text-complete 500ms;
+animation-fill-mode: forwards;
 }
 
 .deleteItem {
@@ -154,3 +184,25 @@ margin-right: 0%;
 left: 85%;
 color: grey
 }
+
+@keyframes load-page {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0%;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 100%;
+    }
+}
+
+@keyframes text-complete {
+    0% {
+        color: black;
+    }
+    100% {
+        color: grey;
+
+    }
+}
+
